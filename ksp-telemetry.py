@@ -77,12 +77,12 @@ def arrange_subplots() -> Tuple[int, int]:
     return (2, 3) if args.verbose else (2, 2)
 
 
+fig = plt.figure(figsize=(14, 6) if args.verbose else (10, 6))
+
+if args.title:
+    fig.suptitle(args.title, fontsize=14)
+
 try:
-    fig = plt.figure(figsize=(14, 6) if args.verbose else (10, 6))
-
-    if args.title:
-        fig.suptitle(args.title, fontsize=14)
-
     plt.subplot(*arrange_subplots(), 1)  # asterisk expands tuple
     plt.plot([dist / 1000 for dist in telemetry_data["DownRange"]],  # convert to km
              [alt_asl / 1000 for alt_asl in telemetry_data["AltitudeASL"]])
